@@ -1,8 +1,10 @@
 package ru.stc.dantes.clientapi.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.stc.dantes.clientapi.dto.ClientRequest;
 import ru.stc.dantes.clientapi.model.Client;
@@ -14,15 +16,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v0/pool/client")
 @RequiredArgsConstructor
+@Validated
 public class ClientController {
 
     private final ClientService clientService;
 
     @GetMapping("/all")
     public List<Client> getClients() {
-        List<Client> clients = clientService.getAllClients();
         //TODO: Спросить должен ли этот метод возвращать все поля, или всё таки id и name
-        return null;
+        return clientService.getAllClients();
     }
 
     @GetMapping("/get/{id}")
@@ -32,12 +34,12 @@ public class ClientController {
     }
 
     @PostMapping("/add")
-    public void addClient(@RequestBody ClientRequest request) {
+    public void addClient(@Valid @RequestBody ClientRequest request) {
         clientService.addClient(request);
     }
 
-    @PostMapping("/update")
-    public void updateClient(@RequestBody ClientRequest request) {
-
+    @PostMapping("/update/{id}")
+    public Client updateClient(@PathVariable("id") int id, @Valid @RequestBody Client updatedClient) {
+        return clientService.updateClient(id, updatedClient);
     }
 }

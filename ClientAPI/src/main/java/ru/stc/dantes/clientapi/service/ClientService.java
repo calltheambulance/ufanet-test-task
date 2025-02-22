@@ -25,7 +25,7 @@ public class ClientService {
                 .phone(request.getPhone())
                 .build();
         clientRepository.save(client);
-        log.info("Добавлен новый клиент {id}", client.getId());
+        log.info("Добавлен новый клиент");
     }
 
     public List<Client> getAllClients() {
@@ -34,5 +34,18 @@ public class ClientService {
 
     public Optional<Client> getClientById(int id) {
         return clientRepository.findById(id);
+    }
+
+    public Client updateClient(int id, Client clientDetails) {
+        Optional<Client> clientOptional = clientRepository.findById(id);
+        if (clientOptional.isPresent()) {
+            Client client = clientOptional.get();
+            client.setName(clientDetails.getName());
+            client.setEmail(clientDetails.getEmail());
+            client.setPhone(clientDetails.getPhone());
+            return clientRepository.save(client);
+        } else {
+            throw new RuntimeException("Клиент с id = " + id + " не найден");
+        }
     }
 }
