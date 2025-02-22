@@ -15,7 +15,6 @@ import lombok.Data;
 @Builder
 public class ClientRequest {
 
-
     @Pattern(
             regexp = "^[A-Za-zА-Яа-я\\s]+$",
             message = "ФИО должно содержать только буквы и пробелы"

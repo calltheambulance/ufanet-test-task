@@ -23,7 +23,6 @@ public class ClientController {
 
     @GetMapping("/all")
     public List<Client> getClients() {
-        //TODO: Спросить должен ли этот метод возвращать все поля, или всё таки id и name
         return clientService.getAllClients();
     }
 
