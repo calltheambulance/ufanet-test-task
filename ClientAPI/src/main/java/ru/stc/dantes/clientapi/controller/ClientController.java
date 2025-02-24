@@ -22,9 +22,6 @@ public class ClientController {
 
     private final ClientService clientService;
 
-
-    //TODO: сделать вывод только id и имени клиентов
-
     @GetMapping("/all")
     public List<ClientDto> getClients() {
         return clientService.getAllClients();

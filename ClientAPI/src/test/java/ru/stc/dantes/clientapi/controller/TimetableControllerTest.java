@@ -1,6 +1,5 @@
 package ru.stc.dantes.clientapi.controller;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +17,6 @@ public class TimetableControllerTest {
     private TimeSlotService timeSlotService;
 
     void getAvailableSlots_ShouldReturnAvailableSlots() throws Exception {
-        
+
     }
 }
