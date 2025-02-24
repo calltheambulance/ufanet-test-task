@@ -9,6 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/*
+ * Класс-сущность для Клиента
+ */
 
 @Data
 @Builder

@@ -17,6 +17,10 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
+ * Сервис с бизнес-логикой по бронированию и временным слотам
+ */
+
 @Service
 @Slf4j
 @RequiredArgsConstructor

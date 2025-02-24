@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/*
+ * Класс-сущность для оформленных броней
+ */
 @Data
 @Builder
 @Entity

@@ -11,6 +11,10 @@ import ru.stc.dantes.clientapi.repository.ClientRepository;
 import java.util.List;
 import java.util.Optional;
 
+/*
+ * Сервис с бизнес-логикой по Клиенту
+ */
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
