@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.stc.dantes.clientapi.dto.ClientDto;
 import ru.stc.dantes.clientapi.dto.ClientRequest;
 import ru.stc.dantes.clientapi.model.Client;
 import ru.stc.dantes.clientapi.service.ClientService;
@@ -21,13 +22,16 @@ public class ClientController {
 
     private final ClientService clientService;
 
+
+    //TODO: сделать вывод только id и имени клиентов
+
     @GetMapping("/all")
-    public List<Client> getClients() {
+    public List<ClientDto> getClients() {
         return clientService.getAllClients();
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Client> getClient(@PathVariable("id") int id) {
+    @GetMapping("/get")
+    public ResponseEntity<Client> getClient(@RequestParam int id) {
         Optional<Client> client = clientService.getClientById(id);
         return client.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
@@ -37,8 +41,8 @@ public class ClientController {
         clientService.addClient(request);
     }
 
-    @PostMapping("/update/{id}")
-    public Client updateClient(@PathVariable("id") int id, @Valid @RequestBody Client updatedClient) {
+    @PostMapping("/update")
+    public Client updateClient(@RequestParam("id") int id, @Valid @RequestBody Client updatedClient) {
         return clientService.updateClient(id, updatedClient);
     }
 }

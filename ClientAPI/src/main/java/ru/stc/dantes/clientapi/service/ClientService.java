@@ -3,6 +3,7 @@ package ru.stc.dantes.clientapi.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import ru.stc.dantes.clientapi.dto.ClientDto;
 import ru.stc.dantes.clientapi.dto.ClientRequest;
 import ru.stc.dantes.clientapi.model.Client;
 import ru.stc.dantes.clientapi.repository.ClientRepository;
@@ -28,8 +29,8 @@ public class ClientService {
         log.info("Добавлен новый клиент");
     }
 
-    public List<Client> getAllClients() {
-        return clientRepository.findAll();
+    public List<ClientDto> getAllClients() {
+        return clientRepository.findAllClients();
     }
 
     public Optional<Client> getClientById(int id) {

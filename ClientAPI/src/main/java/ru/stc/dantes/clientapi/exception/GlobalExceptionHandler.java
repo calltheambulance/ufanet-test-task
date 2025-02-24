@@ -9,12 +9,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+    Класс - обработчик исключений
+ */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /*
+       Функция - обработчик исключений, связанных с валидацией полей классов-сущностей. Сработает при неправильном вводе, например, полей Клиента.
+    */
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-
     public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult().getAllErrors().forEach((error) -> {
@@ -24,4 +30,31 @@ public class GlobalExceptionHandler {
         });
         return errors;
     }
+
+    /*
+        Функция - обработчик исключений, связанных с неверным вводом полей для оформления брони. Сработает, например, в том случае,
+        если пользователь ввёл время, когда бассейн закрыт.
+     */
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleValidationExceptions(IllegalArgumentException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+        return errors;
+    }
+
+    /*
+        Функция - обработчик исключений, связанных со случаями по типу "Слот уже забронирован", или "Слот не найден"
+     */
+
+    @ExceptionHandler(OrderException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public Map<String, String> handleValidationExceptions(OrderException ex) {
+        Map<String, String> errors = new HashMap<>();
+        errors.put("error", ex.getMessage());
+        return errors;
+    }
+
+
 }

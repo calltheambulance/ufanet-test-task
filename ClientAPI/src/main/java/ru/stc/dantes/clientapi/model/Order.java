@@ -1,27 +1,30 @@
 package ru.stc.dantes.clientapi.model;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 
-/*
-    Поля класса:
-    id ID
-    date DATE
-    time VARCHAR(в формате 10:00 11:00 итд)
-    clientId ID(из таблицы клиентов)
-
- */
 @Data
 @Builder
+@Entity
+@Table(name = "client_order")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Order {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String time;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
 
-    private LocalDate date;
+    @ManyToOne
+    @JoinColumn(name = "time_slot_id")
+    private TimeSlot timeSlot;
 
-    private int clientId;
 }

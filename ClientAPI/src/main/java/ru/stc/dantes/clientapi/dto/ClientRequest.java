@@ -1,7 +1,7 @@
 package ru.stc.dantes.clientapi.dto;
 
 /*
-    Класс для добавления нового клиента
+ * Класс для добавления нового клиента
  */
 
 import jakarta.validation.constraints.Email;
