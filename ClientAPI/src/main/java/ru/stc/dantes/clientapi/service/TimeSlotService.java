@@ -57,7 +57,6 @@ public class TimeSlotService {
             throw new IllegalArgumentException("Бассейн работает с 9:00 до 23:00");
         }
 
-        //TODO: Сделать новое исключение для клиента
         Client client = clientRepository.findById(request.getClientId()).orElseThrow(() -> new RuntimeException("Клиент не найден"));
 
         TimeSlot timeSlot = timeSlotRepository.findByDateAndTime(
