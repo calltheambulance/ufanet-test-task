@@ -4,7 +4,6 @@ COPY ClientAPI/pom.xml .
 COPY ClientAPI/src ./src
 RUN mvn -f pom.xml clean package -DskipTests
 
-# Финальный образ с приложением
 FROM openjdk:17-jdk-slim
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
